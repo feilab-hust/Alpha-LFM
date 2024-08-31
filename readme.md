@@ -59,7 +59,7 @@ We provide a user-friendly GUI package for fast network construction, which cons
 * The workflow of this GUI is composed of 4 components:
   ① Dataset generation ② Network training ③ Network validation ④ Network fine-tuning.
  \
-***Note: The detailed explanation of these components and corresponding operation process are all included in the [Alpha-LFM manual](/VCD%202.0%20manual.pdf)***
+***Note: The detailed explanation of these components and corresponding operation process are all included in the [Alpha-LFM manual](/Alpha-LFM%20Manual.pdf)***
   \
   \
 ![GUI screenshot](./source/manual_source/GUI_FLOW.png)
