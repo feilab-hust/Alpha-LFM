@@ -2,7 +2,7 @@
 # Alpha-LFM Software
 This software accompanies the paper:
 \
-**Sustained 3D super-resolution imaging of subcellular dynamics using adaptive-learning physics-aware light-field microscopy*** ( ***Unpublished*** )
+**Sustained 3D super-resolution imaging of subcellular dynamics using adaptive-learning physics-aware light-field microscopy** ( ***Unpublished*** )
 
 # Contents
 - [Requirements](#Requirements)
