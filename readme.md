@@ -30,24 +30,26 @@
 
 ### Model inference for quick validation
 ***Note: Users can fast implement the [trained models](/checkpoint) on our provided [validation data](/example/validation_data)***.
-* Step 1: 
+* **Step 1:**
 <br> Set the parameters in 'config_test.py'. For example, use the trained 'lysosome' model to conduct LFM 3D reconstruction
     ```
     label = 'lysosome_enhanced'
     validation_data_path= r'./example/validation_data/lyso'
     ```
-* Step 2: Run 'eval.py' with the following command. 
+* **Step 2:** Run 'eval.py' with the following command. 
 <br> The results will be saved at the child folder "Recon_lysosome_enhanced". "0" in the command means the GPU ID.
     ```
     python eval.py -g 0
     ```
 ### Model training on paired data
-* Step 1: 
+* **Step 1:** 
 <br> Set the parameters in 'config.py'. Detailed descriptions of the parameters are provided within the file as code annotations.
-* Step 2: 
-<br> Pre-train each sub-model in Alpha-Net (*e.g.*, denoising, de-aliasing, 3D Reconstruction). Users can type the following command in console:
+* **Step 2:** 
+<br> Pre-train each sub-module in Alpha-Net (*e.g.*, denoising, de-aliasing, 3D Reconstruction). Users can type the following command in console:
     ```
     python ./pretrainers/preTrain_denoise.py -g 0
+    python ./pretrainers/preTrain_ViewSR.py -g 2
+    python ./pretrainers/preTrain_VCD.py -g 3
     ```
 
 

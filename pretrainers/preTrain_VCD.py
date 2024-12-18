@@ -210,10 +210,10 @@ if __name__ == '__main__':
         from model import *
         from misc.utils import write3d,_raise,is_number
         from misc.dataset_LF_Vol import Dataset
-        from config import configs_settings
+        from config import config as configs_settings
 
         ###=================img pre ===========================###
-        local_configs = configs_settings(args.config_path)
+        local_configs = configs_settings
         img_size = local_configs.img_setting.img_size
         n_slices = local_configs.img_setting.n_slices
         n_num = local_configs.img_setting.Nnum

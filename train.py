@@ -295,11 +295,7 @@ class Trainer:
         # # update dataset
         dataset_size = self.dataset.prepare(batch_size, n_epoch, skip_loading=True)
         final_cursor = (dataset_size // batch_size - 1) * batch_size
-        # # update srNet and reconNet
-        # sr_file_name = preSRVCD_ckpt_save + '/SR_net_{}.npz'.format('best')
-        # recon_file_name = preSRVCD_ckpt_save + '/recon_net_{}.npz'.format('best')
-        # tl.files.load_and_assign_npz(sess=self.sess, name=sr_file_name, network=self.SR_net)
-        # tl.files.load_and_assign_npz(sess=self.sess, name=recon_file_name,network=self.Recon_net)
+
         while self.dataset.hasNext():
             Stack_batch, Scan_batch, Syn_batch, LF_batch, cursor, epoch = self.dataset.iter()  # get data
             feed_train = {

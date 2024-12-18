@@ -210,7 +210,7 @@ if __name__ == '__main__':
         args = parser.parse_args()
         os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
         os.environ['CUDA_VISIBLE_DEVICES'] = str(args.gpu)
-        sys.path.append(os.path.join(os.getcwd(), 'DL'))
+
         import time
         import tensorflow as tf
         import tensorlayer as tl
@@ -218,10 +218,10 @@ if __name__ == '__main__':
         from model import *
         from misc.utils import write3d, save_configs, _raise, is_number
         from misc.dataset_LF_LF import Dataset
-        from config import configs_settings
+        from config import config as configs_settings
 
         ###=================training para ===========================###
-        local_configs = configs_settings(args.config_path)
+        local_configs = configs_settings
         root_path = local_configs.root_path
         label = local_configs.label + '_preViewSR'
 
@@ -246,8 +246,8 @@ if __name__ == '__main__':
         sample_ratio = 1.0
         sr_factor = local_configs.img_setting.sr_factor
 
-        test_saving_dir = os.path.join(root_path, 'DL', local_configs.TRAIN.test_saving_path, 'preViewSR')
-        checkpoint_dir = os.path.join(root_path, 'DL', local_configs.TRAIN.ckpt_dir, 'preViewSR')
+        test_saving_dir = os.path.join(root_path, local_configs.TRAIN.test_saving_path, 'preViewSR')
+        checkpoint_dir = os.path.join(root_path, local_configs.TRAIN.ckpt_dir, 'preViewSR')
         ckpt_saving_interval = 10
         test_hr_dir = os.path.join(test_saving_dir, 'Syn_view')
         test_lf_dir = os.path.join(test_saving_dir, 'LF2D_TEST')
