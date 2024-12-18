@@ -63,6 +63,14 @@ class Trainer:
         self.sess.run(tf.global_variables_initializer())
         self.sess.run(tf.assign(self.learning_rate, lr_init))
 
+        ###====================== LOAD ckpt ===========================###
+        try:
+            tl.files.load_and_assign_npz(sess=self.sess, name=checkpoint_dir + '/recon_net_epoch{}.npz'.format(begin_epoch),
+                                         network=self.Recon_net)
+            print('found ckpt %s'%(checkpoint_dir + '/recon_net_epoch{}.npz'.format(begin_epoch)))
+        except Exception:
+            print('no found ckpt')
+
 
         ###====================== LOAD DATA ===========================###
 
