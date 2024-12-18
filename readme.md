@@ -42,7 +42,7 @@ Deep-learning model requirments:
 
 
 # Usage
-### Workflow of Alpha-LFM software
+### Components of Alpha-LFM software
 * Tools under this repository are used to generate training data and build physics-aware network for 3D super-resolution reconstruction in LFM. 
 We provide a user-friendly GUI package for fast network construction, which consists of 
 
