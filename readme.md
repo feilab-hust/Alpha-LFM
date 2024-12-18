@@ -46,7 +46,7 @@ If you use this code and relevant data, please cite the corresponding paper wher
 Sustained 3D super-resolution imaging of subcellular dynamics using adaptive-learning physics-aware light-field microscopy. 
 
 # Contact
-Correspondence Should you have any questions regarding this code and the corresponding results, please contact Lanxin Zhu (zhulanxin1@hust.edu.cn)
+Correspondence Should you have any questions regarding this code and the corresponding results, please contact Lanxin Zhu (lanxinzhu@hust.edu.cn)
 
 # ToDo:
 - Upload more training example
