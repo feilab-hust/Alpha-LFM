@@ -30,12 +30,12 @@
 - matplotlib==3.4.1
 - mat73==0.59
 ```
-**Note: more details about depencies installation can be found at the "User manual" in the main branch of Alpha-LFM**
+**Note: more details about dependencies installation can be found at the "User manual" in the main branch of Alpha-LFM**
 
 # Usage
 
 ### Model inference for quick validation
-   * Users can fast implement the [trained models](/DL/checkpoint) on our provided [validation data](/example/validation_data).
+   * Users can fast implement the [trained models](/checkpoint) on our provided [validation data](/example/validation_data).
      The step-by-step illustration of this process are detailed in Section 3.3, "Quick start guide",[Alpha-LFM manual](/Alpha-LFM%20Manual.pdf). The reconstruction results of example data are available at [Google Drive](https://drive.google.com/file/d/12gmTYRYSmYBnTj5Ha90yrMZVrBdFwLsv/view?usp=sharing).
 
 ### Model training on paired data

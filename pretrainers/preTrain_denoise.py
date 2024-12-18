@@ -205,7 +205,7 @@ if __name__ == '__main__':
     from model import *
     from misc.utils import write3d, save_configs,_raise,is_number
     from misc.dataset_LF_LF import Dataset
-    from config import configs_settings
+    from config import config
 
     ###=================default paras ===========================###
     loss_dict = {
