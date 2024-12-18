@@ -35,10 +35,22 @@
 # Usage
 
 ### Model inference for quick validation
-   * Users can fast implement the [trained models](/checkpoint) on our provided [validation data](/example/validation_data).
-     The step-by-step illustration of this process are detailed in Section 3.3, "Quick start guide",[Alpha-LFM manual](/Alpha-LFM%20Manual.pdf). The reconstruction results of example data are available at [Google Drive](https://drive.google.com/file/d/12gmTYRYSmYBnTj5Ha90yrMZVrBdFwLsv/view?usp=sharing).
-
+**Note: Users can fast implement the [trained models](/checkpoint) on our provided [validation data](/example/validation_data)**.
+* Step 1: 
+<br> Set the parameters in 'config_test.py'. For example, use the trained 'lysosome' model to conduct LFM 3D reconstruction
+    ```
+    label = 'lysosome_enhanced'
+    validation_data_path= r'./example/validation_data/lyso'
+    ```
+* Step 2: Run 'eval.py' with the following command. 
+<br>The results will be saved at the child folder "Recon_lysosome_enhanced". "0" in the command means the GPU ID.
+    ```
+    python eval.py -g 0
+    ```
 ### Model training on paired data
+
+
+
 
 # Citation
 If you use this code and relevant data, please cite the corresponding paper where original methods appeared: 

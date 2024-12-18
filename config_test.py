@@ -4,10 +4,9 @@ import copy
 import os
 from config import config as train_configs
 
-## passed GUI parameters
 label = 'lysosome_enhanced'
-validation_data_path= r'J:\YCQ_TEMP\LF\GUI\validation\validation_data\lyso'
-##
+validation_data_path= r'./example/validation_data/lyso'
+
 config = copy.deepcopy(train_configs)
 config['root_path']=os.getcwd()
 config['validation_data_path']=validation_data_path

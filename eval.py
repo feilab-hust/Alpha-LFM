@@ -21,7 +21,7 @@ def read_valid_images(path):
     return img_set, img_list, height, width
 
 
-def infer(epoch, batch_size=1, use_cpu=False):
+def infer(batch_size=1, use_cpu=False):
     """ Infer the 3-D images from the 2-D LF images using the trained VCD-Net
 
     Params:
@@ -35,8 +35,8 @@ def infer(epoch, batch_size=1, use_cpu=False):
     else:
         epoch = str(val_epoch)
     # checkpoint_dir = config.Trans.ckpt_dir if args.trans else config.TRAIN.ckpt_dir
-    checkpoint_dir = os.path.join(config['root_path'],'DL','checkpoint',label)
-    valid_lr_img_path = config['validation_data_path'][0]
+    checkpoint_dir = os.path.join(config['root_path'],'checkpoint',label)
+    valid_lr_img_path = config['validation_data_path']
     save_dir = os.path.join(valid_lr_img_path,'Recon_%s'%label)
     tl.files.exists_or_mkdir(save_dir)
 
@@ -143,21 +143,18 @@ if __name__ == '__main__':
     # parser paras
     parser = argparse.ArgumentParser()
     parser.add_argument('-g', '--gpu', type=int, default=0, help='')
-    parser.add_argument('-c', '--ckpt', type=int, default=0)
     parser.add_argument('-b', '--batch', type=int, default=1)
     parser.add_argument("--cpu", help="use CPU instead of GPU for inference",
                         action="store_true")
     args = parser.parse_args()
-    ckpt = args.ckpt
     batch_size = args.batch
     use_cpu = args.cpu
     use_cpu = True if args.gpu==-1 else False
     os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
     os.environ['CUDA_VISIBLE_DEVICES'] = str(args.gpu)
 
-
     import tensorflow as tf
     tf.compat.v1.logging.set_verbosity(tf.compat.v1.logging.ERROR)
     import tensorlayer as tl
     from model import LF_attention_denoise,MultiRes_UNet,LF_SA_small
-    infer(ckpt, batch_size=batch_size, use_cpu=use_cpu)
+    infer(batch_size=batch_size, use_cpu=use_cpu)
