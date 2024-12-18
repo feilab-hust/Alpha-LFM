@@ -2,12 +2,6 @@
 # Alpha-Net
 **This is a branch of Alpha-LFM that contains only the source code related to the neural network.**
 
-# Contents
-- [Requirements](#Requirements)
-- [Usage](#Usage)
-- [Citation](#Citation)
-- [Contact](#Contact)
-- [ToDo](#ToDo)
 # Requirements
 - **System requirements**
 ```
@@ -30,12 +24,12 @@
 - matplotlib==3.4.1
 - mat73==0.59
 ```
-**Note: more details about dependencies installation can be found at the "User manual" in the main branch of Alpha-LFM**
+***Note: more details about dependencies installation can be found at the "User manual" in the main branch of Alpha-LFM***
 
 # Usage
 
 ### Model inference for quick validation
-**Note: Users can fast implement the [trained models](/checkpoint) on our provided [validation data](/example/validation_data)**.
+***Note: Users can fast implement the [trained models](/checkpoint) on our provided [validation data](/example/validation_data)***.
 * Step 1: 
 <br> Set the parameters in 'config_test.py'. For example, use the trained 'lysosome' model to conduct LFM 3D reconstruction
     ```
@@ -43,7 +37,7 @@
     validation_data_path= r'./example/validation_data/lyso'
     ```
 * Step 2: Run 'eval.py' with the following command. 
-<br>The results will be saved at the child folder "Recon_lysosome_enhanced". "0" in the command means the GPU ID.
+<br> The results will be saved at the child folder "Recon_lysosome_enhanced". "0" in the command means the GPU ID.
     ```
     python eval.py -g 0
     ```
@@ -60,6 +54,3 @@ Sustained 3D super-resolution imaging of subcellular dynamics using adaptive-lea
 # Contact
 Correspondence Should you have any questions regarding this code and the corresponding results, please contact Lanxin Zhu (lanxinzhu@hust.edu.cn)
 
-# ToDo:
-- Upload more training example
-- Rewrite the Python data-generation module to enhance its usability across a broader range of applications 

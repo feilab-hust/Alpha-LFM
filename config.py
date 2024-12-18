@@ -27,8 +27,8 @@ config.img_setting.ReScale_factor = [vol_sr_factor / shift_times, vol_sr_factor 
 config.img_setting.Nnum = 15          # N number of the light field psf
 config.img_setting.n_slices = 161     # Z-slices of 3D target
 
-config.img_setting.data_root_path = r'J:\YCQ_TEMP\LF\NC_LFM\rab_trainingpair_Data\rab_base_data_720\S01_TrainingData'
-config.img_setting.save_hdf5 = False
+config.img_setting.data_root_path = r'J:\YCQ_TEMP\LF\NC_LFM\rab_trainingpair_Data\rab_base_data_720\S01_TrainingData'   # The training data directory
+config.img_setting.save_hdf5 = False      # The training data directory
 config.img_setting.save_bit = 16
 # ------------------------------Net Setting----------------------------------
 config.net_setting.gpu_idx=0
