@@ -42,10 +42,9 @@ Deep-learning model requirments:
 
 
 # Usage
-### Components of Alpha-LFM software
-* Tools under this repository are used to generate training data and build physics-aware network for 3D super-resolution reconstruction in LFM. 
-We provide a user-friendly GUI package for fast network construction, which consists of 
-
+### Structure & Workflow of Alpha-LFM software
+* Tools under this repository are used to **generate training data** and **build alpha-net**. 
+We provide a user-friendly GUI package for fast network construction, which consists of
   * ***'main.mlapp***: *The main function of Alpha-LFM GUI which includes:*
   	* *‘DataPreparation.mlapp’*：*The sub-function for dataset pre-processing*
 	* *‘NetworkTraining.mlapp’*：*The sub-function for network training*
@@ -55,7 +54,8 @@ We provide a user-friendly GUI package for fast network construction, which cons
   * ***DL***: *The source code of alpha-net  (The trained model will be automatically saved at its sub-folders)*
   * ***source***: *Light-field PSF matrix and example figures*
   * utils: *Sub-functions of Matlab-based GUI*
-  
+
+
 * The workflow of this GUI is composed of 4 components:
   ① Dataset generation ② Network training ③ Network validation ④ Network fine-tuning.
  \
@@ -74,7 +74,7 @@ If you use this code and relevant data, please cite the corresponding paper wher
 Sustained 3D super-resolution imaging of subcellular dynamics using adaptive-learning physics-aware light-field microscopy. 
 
 # Contact
-Correspondence Should you have any questions regarding this code and the corresponding results, please contact Lanxin Zhu (zhulanxin1@hust.edu.cn)
+ Should you have any questions regarding this code and the corresponding results, please contact Lanxin Zhu (lanxinzhu@hust.edu.cn)
 
 # ToDo:
 - Upload more training example
