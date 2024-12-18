@@ -58,7 +58,6 @@ class Trainer:
         ## create folders to save result images and trained model
         save_dir = test_saving_dir
         tl.files.exists_or_mkdir(save_dir)
-        # save_configs(save_folder=os.path.join(os.getcwd(),save_dir))
         tl.files.exists_or_mkdir(checkpoint_dir)
         tl.files.exists_or_mkdir(test_lf_dir)
         tl.files.exists_or_mkdir(test_hr_dir)
@@ -193,11 +192,11 @@ if __name__ == '__main__':
     import sys
     parser = argparse.ArgumentParser()
     parser.add_argument('-g', '--gpu', type=int, default=0, help='')
-    parser.add_argument('-cfg', '--config_path', type=str)
+    # parser.add_argument('-cfg', '--config_path', type=str)
     args = parser.parse_args()
     os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
     os.environ['CUDA_VISIBLE_DEVICES'] = str(args.gpu)
-    sys.path.append(os.path.join(os.getcwd(), 'DL'))
+    # sys.path.append(os.path.join(os.getcwd(), 'DL'))
     import time
     import tensorflow as tf
     import tensorlayer as tl
@@ -205,7 +204,7 @@ if __name__ == '__main__':
     from model import *
     from misc.utils import write3d, save_configs,_raise,is_number
     from misc.dataset_LF_LF import Dataset
-    from config import config
+    from config import config as configs_settings
 
     ###=================default paras ===========================###
     loss_dict = {
@@ -224,13 +223,13 @@ if __name__ == '__main__':
     ckpt_saving_interval = 10
 
     ###=================customized settings ===========================###
-    local_configs =configs_settings(args.config_path)
+    local_configs =configs_settings
     root_path = local_configs.root_path
     label = local_configs.label + '_preDenoise'
 
     n_epoch = local_configs.Pretrain.Training_epoch[0]
-    test_saving_dir = os.path.join(root_path, 'DL', local_configs.TRAIN.test_saving_path, 'preDenoise')
-    checkpoint_dir = os.path.join(root_path, 'DL', local_configs.TRAIN.ckpt_dir, 'preDenoise')
+    test_saving_dir = os.path.join(root_path, local_configs.TRAIN.test_saving_path, 'preDenoise')
+    checkpoint_dir = os.path.join(root_path,  local_configs.TRAIN.ckpt_dir, 'preDenoise')
     test_hr_dir = os.path.join(test_saving_dir, 'Syn_view')
     test_lf_dir = os.path.join(test_saving_dir, 'LF2D_TEST')
     img_size = local_configs.img_setting.img_size
@@ -240,9 +239,7 @@ if __name__ == '__main__':
     sr_factor = local_configs.img_setting.sr_factor
     save_hdf5= local_configs.img_setting.save_hdf5
     data_root_path=local_configs.img_setting.data_root_path
-    finish_flag_file=os.path.join(root_path,'logging','preDe_finish_%s.txt'%local_configs.label)
-    if os.path.exists(finish_flag_file):
-        os.remove(finish_flag_file)
+
     if save_hdf5:
         base_path = os.path.join(local_configs.img_setting.data_root_path,'training_data.h5')
         data_str=['cLF','nLF']
@@ -262,8 +259,7 @@ if __name__ == '__main__':
     trainer.build_graph()
     trainer.train(begin_epoch=0)
     print('train denoise:',args.gpu)
-    with open(finish_flag_file, 'w') as f:
-        f.write('1')
+
 
 
 
