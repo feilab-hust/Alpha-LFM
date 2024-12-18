@@ -42,8 +42,13 @@
     python eval.py -g 0
     ```
 ### Model training on paired data
-
-
+* Step 1: 
+<br> Set the parameters in 'config.py'. Detailed descriptions of the parameters are provided within the file as code annotations.
+* Step 2: 
+<br> Pre-train each sub-model in Alpha-Net (*e.g.*, denoising, de-aliasing, 3D Reconstruction). Users can type the following command in console:
+    ```
+    python ./pretrainers/preTrain_denoise.py -g 0
+    ```
 
 
 # Citation

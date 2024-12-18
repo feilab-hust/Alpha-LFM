@@ -28,19 +28,20 @@ config.img_setting.Nnum = 15          # N number of the light field psf
 config.img_setting.n_slices = 161     # Z-slices of 3D target
 
 config.img_setting.data_root_path = r'J:\YCQ_TEMP\LF\NC_LFM\rab_trainingpair_Data\rab_base_data_720\S01_TrainingData'   # The training data directory
-config.img_setting.save_hdf5 = False      # The training data directory
-config.img_setting.save_bit = 16
+config.img_setting.save_hdf5 = False      # The format of training data (default: False, means '.tif' files)
+config.img_setting.save_bit = 16       # The bitdepth of training data
+
 # ------------------------------Net Setting----------------------------------
-config.net_setting.gpu_idx=0
+config.net_setting.gpu_idx=0            # GPU ID for joint-optimization
 config.net_setting.denoise_model = 'LF_attention_denoise'
 config.net_setting.SR_model = 'LF_SA_small'
 config.net_setting.Recon_model = 'MultiRes_UNet'
-config.net_setting.ngf=[32,64,128]                 # Unet channel
+config.net_setting.ngf=[32,64,128]                                  # Unet channel
 config.net_setting.is_bias = False
 config.net_setting.Unetpyrimid_list=[128,256,512,512,512]
 
 # ------------------------------Pretrain Setting----------------------------------
-config.Pretrain.loading_pretrain_model=True
+config.Pretrain.loading_pretrain_model=True     # Whether to load pretrained model, default: true, which means users need to pretrain each task-specific model before joint-optimizaiton
 config.Pretrain.Training_epoch=[51,101,151]
 config.local_pre_SRVCD_dict={
         'lr_init':5*1e-4,
