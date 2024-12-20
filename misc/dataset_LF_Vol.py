@@ -50,11 +50,11 @@ class Dataset:
             img_list = sorted(get_file_list(path=path, regx=regx, printable=printable))
             imgs = []
             list_len = int(len(img_list) * self.sample_ratio)
-            for img_file in img_list[0:list_len]:
+            for img_idx,img_file in enumerate(img_list[0:list_len]):
                 img = fn(img_file, path, **kwargs)
                 if (img.dtype != np.float32):
                     img = img.astype(np.float32, casting='unsafe')
-                print('\r%s training data loading: %s -- %s  ---min: %f max:%f' % (
+                print('\r[%d/%d] %s training data loading: %s -- %s  ---min: %f max:%f' % (img_idx,list_len,
                 type_name, img_file, str(img.shape), np.min(img), np.max(img)), end='')
                 imgs.append(img)
             return imgs

@@ -202,7 +202,6 @@ if __name__ == '__main__':
         os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
         os.environ['CUDA_VISIBLE_DEVICES'] = str(args.gpu)
         print('current folder', os.getcwd())
-        sys.path.append(os.path.join(os.getcwd(),'DL'))
         import time
         import tensorflow as tf
         import tensorlayer as tl
@@ -238,8 +237,8 @@ if __name__ == '__main__':
         ###=================dir ===========================###
         root_path = local_configs.root_path
         label = local_configs.label + '_preVCD'
-        test_saving_dir = os.path.join(root_path, 'DL', local_configs.TRAIN.test_saving_path, 'preVCD')
-        checkpoint_dir = os.path.join(root_path, 'DL', local_configs.TRAIN.ckpt_dir, 'preVCD')
+        test_saving_dir = os.path.join(root_path,  local_configs.TRAIN.test_saving_path, 'preVCD')
+        checkpoint_dir = os.path.join(root_path, local_configs.TRAIN.ckpt_dir, 'preVCD')
         ckpt_saving_interval = 10
         test_hr_dir = os.path.join(test_saving_dir, 'Syn_view')
         test_lf_dir = os.path.join(test_saving_dir, 'LF2D_TEST')
@@ -267,9 +266,5 @@ if __name__ == '__main__':
         trainer.build_graph()
         trainer.train(begin_epoch=0)
         print('vcd:',args.gpu)
-        with open(finish_flag_file, 'w') as f:
-            f.write('1')
-
-
 
 

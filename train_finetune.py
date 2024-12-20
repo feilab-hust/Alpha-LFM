@@ -324,9 +324,9 @@ if __name__ == '__main__':
     label = config.new_model_name
     ckpt_saving_interval = config.TRAIN.ckpt_saving_interval
     root_path = config.root_path
-    checkpoint_dir = os.path.join(root_path, 'DL', config.TRAIN.ckpt_dir)
-    log_dir = os.path.join(root_path, 'DL', config.TRAIN.log_dir)
-    test_saving_dir = os.path.join(root_path, 'DL', config.TRAIN.test_saving_path)
+    checkpoint_dir = os.path.join(root_path,  config.TRAIN.ckpt_dir)
+    log_dir = os.path.join(root_path,  config.TRAIN.log_dir)
+    test_saving_dir = os.path.join(root_path,  config.TRAIN.test_saving_path)
     plot_test_loss_dir = os.path.join(test_saving_dir, 'test_loss_plt')
     test_stack_dir = os.path.join(test_saving_dir, 'Target3D')
     test_hr_dir = os.path.join(test_saving_dir, 'Scan_View')

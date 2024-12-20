@@ -46,7 +46,7 @@ def wf_loss(image, reference,**kwargs):
 
 def wf_loss_mix(image, reference,**kwargs):
     if "projection_range" in kwargs:
-        projection_range= int(kwargs['projection_range'])
+        projection_range= kwargs['projection_range']
     else:
         projection_range=0
     with tf.variable_scope('wf_loss'):
@@ -55,9 +55,8 @@ def wf_loss_mix(image, reference,**kwargs):
 
         proj = tf.image.resize_images(image, [wf_size[1], wf_size[2]])
 
-        proj_img = tf.reduce_sum(proj[:,:,:,0:projection_range], axis=3) if projection_range!=0 else tf.reduce_sum(proj, axis=3)
-
-        proj_img_max = tf.reduce_max(proj[:, :, :, 0:projection_range], axis=3) if projection_range!=0 else tf.reduce_max(proj, axis=3)
+        proj_img = tf.reduce_sum(proj[:,:,:,projection_range[0]:projection_range[1]], axis=3) if projection_range!=0 else tf.reduce_sum(proj, axis=3)
+        proj_img_max = tf.reduce_max(proj[:, :, :, projection_range[0]:projection_range[1]], axis=3) if projection_range!=0 else tf.reduce_max(proj, axis=3)
 
 
         proj_img=proj_img/tf.reduce_max(proj_img)

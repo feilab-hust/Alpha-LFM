@@ -276,9 +276,6 @@ if __name__ == '__main__':
         trainer.build_graph()
         trainer.train(begin_epoch=0)
         print('trainsr:',args.gpu)
-        with open(finish_flag_file, 'w') as f:
-            f.write('1')
-
 
 
 

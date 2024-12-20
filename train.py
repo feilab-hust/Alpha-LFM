@@ -193,7 +193,7 @@ class Trainer:
         self.sess.run(tf.assign(self.learning_rate, lr_init))
 
         # if loading_pretrain_model:
-        denoise_pretrain_ckpt_dir = os.path.join(root_path, 'DL', local_configs.TRAIN.ckpt_dir, 'preDenoise')
+        denoise_pretrain_ckpt_dir = os.path.join(root_path, local_configs.TRAIN.ckpt_dir, 'preDenoise')
         if os.path.exists(denoise_pretrain_ckpt_dir):
             denoise_ckpt_file = [filename for filename in os.listdir(denoise_pretrain_ckpt_dir) if
                                  ('.npz' in filename and 'best' in filename and 'denoise' in filename)]
@@ -201,14 +201,14 @@ class Trainer:
                 tl.files.load_and_assign_npz(sess=self.sess,
                                              name=os.path.join(denoise_pretrain_ckpt_dir, denoise_ckpt_file[0]),
                                              network=self.denoise_net)
-        SR_pretrain_ckpt_dir = os.path.join(root_path, 'DL', local_configs.TRAIN.ckpt_dir, 'preViewSR')
+        SR_pretrain_ckpt_dir = os.path.join(root_path,  local_configs.TRAIN.ckpt_dir, 'preViewSR')
         if os.path.exists(SR_pretrain_ckpt_dir):
             SR_ckpt_file = [filename for filename in os.listdir(SR_pretrain_ckpt_dir) if
                             ('.npz' in filename and 'best' in filename and 'SR' in filename)]
             if len(SR_ckpt_file) != 0:
                 tl.files.load_and_assign_npz(sess=self.sess, name=os.path.join(SR_pretrain_ckpt_dir, SR_ckpt_file[0]),
                                              network=self.SR_net)
-        recon_pretrain_ckpt_dir = os.path.join(root_path, 'DL', local_configs.TRAIN.ckpt_dir, 'preVCD')
+        recon_pretrain_ckpt_dir = os.path.join(root_path, local_configs.TRAIN.ckpt_dir, 'preVCD')
         if os.path.exists(recon_pretrain_ckpt_dir):
             recon_ckpt_file = [filename for filename in os.listdir(recon_pretrain_ckpt_dir) if
                                ('.npz' in filename and 'best' in filename and 'recon' in filename) or (
@@ -481,7 +481,6 @@ if __name__ == '__main__':
     os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
     os.environ['CUDA_VISIBLE_DEVICES'] = str(args.gpu)
     print('current folder', os.getcwd())
-    sys.path.append(os.path.join(os.getcwd(), 'DL'))
     import time
     import tensorflow as tf
     import tensorlayer as tl
@@ -490,10 +489,10 @@ if __name__ == '__main__':
     from model import *
     from misc.dataset_joint import Dataset
     from misc.utils import write3d, save_configs, is_number
-    from config import configs_settings
+    from config import config as configs_settings
 
     ###=================img pre ===========================###
-    local_configs = configs_settings(args.config_path)
+    local_configs = configs_settings
     img_size = local_configs.img_setting.img_size
     n_num = local_configs.img_setting.Nnum
     sr_factor = local_configs.img_setting.sr_factor
@@ -516,14 +515,15 @@ if __name__ == '__main__':
     ###=================dir ===========================###
 
     label = local_configs.label
-    test_saving_dir = os.path.join(root_path, 'DL', local_configs.TRAIN.test_saving_path)
+    test_saving_dir = os.path.join(root_path, local_configs.TRAIN.test_saving_path)
     test_stack_dir = os.path.join(test_saving_dir, 'Target3D')
     test_hr_dir = os.path.join(test_saving_dir, 'Scan_View')
     test_mr_dir = os.path.join(test_saving_dir, 'Clean_View')
     test_lf_dir = os.path.join(test_saving_dir, 'BG_View')
     plot_test_loss_dir = os.path.join(test_saving_dir, 'test_loss_plt')
-    checkpoint_dir = os.path.join(root_path, 'DL', local_configs.TRAIN.ckpt_dir)
-    log_dir = os.path.join(root_path, 'DL', local_configs.TRAIN.log_dir)
+
+    checkpoint_dir = os.path.join(root_path, local_configs.TRAIN.ckpt_dir)
+    log_dir = os.path.join(root_path,  local_configs.TRAIN.log_dir)
     ckpt_saving_interval = local_configs.TRAIN.ckpt_saving_interval
     ###=================losses define ===========================###
     denoise_loss = local_configs.Loss.denoise_loss

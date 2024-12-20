@@ -29,7 +29,8 @@
 # Usage
 
 ### Model inference for quick validation
-***Note: Users can fast implement the [trained models](/checkpoint) on our provided [validation data](/example/validation_data)***.
+***Note: Users can quickly apply the [trained models](/checkpoint) to our provided [validation data](/example/validation_data)***.
+
 * **Step 1:**
 <br> Set the parameters in 'config_test.py'. For example, use the trained 'lysosome' model to conduct LFM 3D reconstruction
     ```
@@ -48,10 +49,14 @@
 <br> Pre-train each sub-module in Alpha-Net (*e.g.*, denoising, de-aliasing, 3D Reconstruction). Users can type the following command in console:
     ```
     python ./pretrainers/preTrain_denoise.py -g 0
-    python ./pretrainers/preTrain_ViewSR.py -g 2
-    python ./pretrainers/preTrain_VCD.py -g 3
+    python ./pretrainers/preTrain_ViewSR.py -g 1
+    python ./pretrainers/preTrain_VCD.py -g 2
     ```
-
+* **Step 3:** 
+  <br> After the pre-training finished, user can train Alpha-net with the following command:
+    ```
+    python train.py -g 2
+    ```
 
 # Citation
 If you use this code and relevant data, please cite the corresponding paper where original methods appeared: 

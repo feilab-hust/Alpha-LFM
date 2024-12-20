@@ -63,7 +63,7 @@ config.TRAIN.ckpt_dir = "checkpoint/{}/".format(label)
 config.TRAIN.log_dir = "log/{}/".format(label)
 config.TRAIN.valid_on_the_fly = False
 
-config.TRAIN.sample_ratio = 0.2
+config.TRAIN.sample_ratio = 1.0
 config.TRAIN.shuffle_all_data = False
 config.TRAIN.shuffle_for_epoch = True
 config.TRAIN.device = 0

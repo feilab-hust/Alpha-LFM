@@ -217,7 +217,7 @@ class Stack2Macron(Layer):
 
 
 class SAI2ViewStack(Layer):
-    def __init__(self, layer=None, name='Macron2StackLayer', angRes=11):
+    def __init__(self, layer=None, name='SAI2StackLayer', angRes=11):
 
         Layer.__init__(self, name=name)
         self.inputs = layer.outputs
