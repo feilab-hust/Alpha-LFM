@@ -79,6 +79,3 @@ If you use this code and relevant data, please cite the corresponding paper wher
 # Contact
  Should you have any questions regarding this code and the corresponding results, please contact Lanxin Zhu (lanxinzhu@hust.edu.cn)
 
-# ToDo:
-- Upload more training example
-- Rewrite the Python data-generation module to enhance its usability across a broader range of applications 
