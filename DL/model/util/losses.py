@@ -15,7 +15,6 @@ __all__ = ['mse_loss',
            'g_mse_loss',
            'mip_loss',
            'wf_loss',
-           'wf_loss_mix',
            ]
 
 AngRes=15
@@ -29,47 +28,36 @@ def mip_loss(image, reference):
 
 
 def wf_loss(image, reference,**kwargs):
-
     if "projection_range" in kwargs:
         projection_range= int(kwargs['projection_range'])
     else:
         projection_range=0
     with tf.variable_scope('wf_loss'):
-        # proj_img = tf.transpose(image, (1, 2, 3,0))
         wf_size = reference.get_shape().as_list()
-        proj_img = tf.image.resize_images(image, [wf_size[1], wf_size[2]])
-        proj_img = tf.reduce_sum(proj_img[:,:,:,0:projection_range], axis=3) if projection_range!=0 else tf.reduce_sum(proj_img, axis=3)
-        proj_img=proj_img/tf.reduce_max(proj_img)
-        proj_img=tf.expand_dims(proj_img,axis=-1)
-        wf_loss = tl.cost.mean_squared_error(proj_img, reference, is_mean=True)
-        return wf_loss
-
-def wf_loss_mix(image, reference,**kwargs):
-    if "projection_range" in kwargs:
-        projection_range= int(kwargs['projection_range'])
-    else:
-        projection_range=0
-    with tf.variable_scope('wf_loss'):
-        # proj_img = tf.transpose(image, (1, 2, 3,0))
-        wf_size = reference.get_shape().as_list()
-
-        proj = tf.image.resize_images(image, [wf_size[1], wf_size[2]])
-
-        proj_img = tf.reduce_sum(proj[:,:,:,0:projection_range], axis=3) if projection_range!=0 else tf.reduce_sum(proj, axis=3)
-
+        proj = tf.image.resize_images(image, [wf_size[1], wf_size[2]])  # re-sample
         proj_img_max = tf.reduce_max(proj[:, :, :, 0:projection_range], axis=3) if projection_range!=0 else tf.reduce_max(proj, axis=3)
-
-
-        proj_img=proj_img/tf.reduce_max(proj_img)
         proj_img_max = proj_img_max / tf.reduce_max(proj_img_max)
-        proj_img=tf.expand_dims(proj_img,axis=-1)
         proj_img_max = tf.expand_dims(proj_img_max, axis=-1)
-        wf_loss = tl.cost.mean_squared_error(proj_img, reference, is_mean=True)
         wf_loss_1 = tl.cost.mean_squared_error(proj_img_max, reference, is_mean=True)
 
-        return wf_loss+5*wf_loss_1
+        return 5*wf_loss_1
 
+def Reprojection_loss(image, reference,**kwargs):
 
+    with tf.variable_scope('Reprojection_loss'):
+        wf_size = reference.get_shape().as_list()
+
+        inten_list = tf.reduce_mean(image,axis=3)
+        z_max = tf.arg_max(inten_list)
+        
+
+        proj = tf.image.resize_images(image, [wf_size[1], wf_size[2]])  # re-sample
+        proj_img_max = tf.reduce_max(proj[:, :, :, 0:projection_range], axis=3) if projection_range!=0 else tf.reduce_max(proj, axis=3)
+        proj_img_max = proj_img_max / tf.reduce_max(proj_img_max)
+        proj_img_max = tf.expand_dims(proj_img_max, axis=-1)
+        wf_loss_1 = tl.cost.mean_squared_error(proj_img_max, reference, is_mean=True)
+
+        return 5*wf_loss_1
 
 
 

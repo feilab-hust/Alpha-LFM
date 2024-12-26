@@ -1,16 +1,20 @@
 
-# Alpha-LFM Software
-**This software accompanies the paper:
-Sustained 3D super-resolution imaging of subcellular dynamics using adaptive-learning physics-aware light-field microscopy** ( ***Unpublished*** )
+# Alpha-LFM
+This repository is developed based on the paper *Adaptive-learning physics-aware light-field microscopy enables day-long and millisecond-scale super-resolution imaging of 3D subcellular dynamics*, which provides a transformation method from 2D light-field microscopy (LFM) images to super-resolution 3D volumes.
+<br>
 
+The repository contains the GUI based Alpha-LFM software enabling data pre-processing, network training and network inference. 
+<br>
+
+We also provide a TensorFlow implementation of [Alpha-Net](https://github.com/feilab-hust/Alpha-LFM/tree/Alpha-net) for developers, enabling easy integration and customization in their projects.
 # Contents
 - [Requirements](#Requirements)
 - [Usage](#Usage)
 - [Citation](#Citation)
 - [Contact](#Contact)
 - [ToDo](#ToDo)
-# Requirements
 
+# Requirements
 - System requirements
 ```
 · Windows 10. Linux should be able to run the code but the code has been only tested on Windows 10 so far.
@@ -70,7 +74,7 @@ We provide a user-friendly GUI package for fast network construction, which cons
 # Citation
 If you use this code and relevant data, please cite the corresponding paper where original methods appeared: 
 \
-Sustained 3D super-resolution imaging of subcellular dynamics using adaptive-learning physics-aware light-field microscopy. 
+*Adaptive-learning physics-aware light-field microscopy enables day-long and millisecond-scale super-resolution imaging of 3D subcellular dynamics*
 
 # Contact
  Should you have any questions regarding this code and the corresponding results, please contact Lanxin Zhu (lanxinzhu@hust.edu.cn)
