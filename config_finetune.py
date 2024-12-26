@@ -1,6 +1,5 @@
-import mat73
 import os
-from config import config as base_model_settings
+from config import config as base_model_settings  # The base model configs
 
 root_path= os.getcwd()
 fine_tune_data_path= './data/finetuning'
