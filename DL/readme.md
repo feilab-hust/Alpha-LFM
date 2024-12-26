@@ -1,5 +1,5 @@
 
-#### The deep-learning related codes for alpha-LFM
+#### The deep-learning related codes for Alpha-LFM
 ***
 Directory Structure:
 ```    
