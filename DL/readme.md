@@ -6,26 +6,26 @@ Directory Structure:
 ├── DL
 
     └── model:
-        Different deep-learning models, contains LF denoise model, View SR model and 3D reconstruction.
+        Different deep learning models, including LF denoising model, View SR model, and 3D reconstruction model.
         └── util:
-            Functions of layers in various DL models.
+            Functions in various DL models.
             
     └── pretrainers: 
-        Three functions for pre-training LF-denoise net, View-SR net and 3D reconstruction net, respectively.
+        Functions for pre-training the LF-denoising network, View-SR network, and 3D reconstruction network.
         
     └── misc: 
         Functions for data loading and processing.
         
     └── logs (generated only when network training):
         Folder for saving logs file during network training 
-        └── samples
+        └── samples:
             The sampled images during network training.
-        └── tensorboard
+        └── tensorboard:
             Tensorboard files stored the loss plots when training and network graph.
 
     └── checkpoint:
         Folder contains the model weights of trained network.
-        Note: For fast implementation alpha-LFM, we provided tie
+        Note: For fast implementation alpha-LFM, we have provided the trained models (e.g. lysosome_enhanced, mito2matrix_finetuning and mito_enhanced)
 
     └── tensorlayer: 
         The third-party codes for building deep learning model (TensorFlow-based).
