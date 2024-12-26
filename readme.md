@@ -55,8 +55,11 @@
 * **Step 3:** 
   <br> After the pre-training finished, user can train Alpha-net with the following command:
     ```
-    python train.py -g 2
+    python train.py -g 0
     ```
+* **Fine-tuning with 2D WFs**
+  <br>
+  Set the parametes in 
 
 # Citation
 If you use this code and relevant data, please cite the corresponding paper where original methods appeared: 

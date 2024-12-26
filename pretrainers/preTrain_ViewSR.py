@@ -60,10 +60,6 @@ class Trainer:
 
 
     def _train(self, begin_epoch):
-        """Train the VCD-Net
-        Params
-            -begin_epoch: int, if not 0, a checkpoint file will be loaded and the training will continue from there
-        """
         ## create folders to save result images and trained model
         save_dir = test_saving_dir
         tl.files.exists_or_mkdir(save_dir)
@@ -77,7 +73,6 @@ class Trainer:
 
 
         ###====================== LOAD DATA ===========================###
-
         dataset_size = self.dataset.prepare(batch_size, n_epoch)
         final_cursor = (dataset_size // batch_size - 1) * batch_size
         self._get_test_data()
@@ -175,11 +170,7 @@ class Trainer:
 
     def _plot_test_loss(self):
         pass
-        # loss = np.asarray(self.test_loss_plt)
-        # plt.figure()
-        # plt.plot(loss[:, 0], loss[:, 1])
-        # plt.savefig(plot_test_loss_dir + '/test_loss.png', bbox_inches='tight')
-        # plt.show()
+
 
     def train(self, **kwargs):
         try:
@@ -206,7 +197,7 @@ if __name__ == '__main__':
         import sys
         parser = argparse.ArgumentParser()
         parser.add_argument('-g', '--gpu', type=int, default=0, help='')
-        parser.add_argument('-cfg', '--config_path', type=str)
+
         args = parser.parse_args()
         os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
         os.environ['CUDA_VISIBLE_DEVICES'] = str(args.gpu)

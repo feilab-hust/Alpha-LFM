@@ -49,10 +49,7 @@ class Trainer:
 
 
     def _train(self, begin_epoch):
-        """Train the VCD-Net
-        Params
-            -begin_epoch: int, if not 0, a checkpoint file will be loaded and the training will continue from there
-        """
+
         save_dir = test_saving_dir
         tl.files.exists_or_mkdir(save_dir)
         tl.files.exists_or_mkdir(checkpoint_dir)

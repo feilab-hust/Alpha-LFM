@@ -23,8 +23,6 @@ class Trainer:
         sr_model = eval(SR_tag)
         recon_model = eval(Recon_tag)
 
-        # net_tag = config.net_tag
-        # input_size = np.array([img_size, img_size])* n_num if 'SA' in SR_tag else np.array([img_size, img_size])
         input_size = np.array([img_size, img_size])
         SR_size = input_size * sr_factor
         Recon_size = np.multiply(SR_size, ReScale_factor)
@@ -38,7 +36,6 @@ class Trainer:
         with tf.device('/gpu:{}'.format(config.TRAIN.device)):
             self.denoise_net = denoise_model(LFP=self.plchdr_lf, output_size=input_size, sr_factor=1, angRes=n_num,
                                              reuse=tf.AUTO_REUSE, channels_interp=ngf1, name=denoise_tag)
-
             self.SR_net = sr_model(LFP=self.denoise_net.outputs, output_size=SR_size, sr_factor=sr_factor,
                                    angRes=n_num, reuse=tf.AUTO_REUSE, name=SR_tag, channels_interp=ngf2,
                                    normalize_mode=normalize_mode, transform_layer='SAI2Macron')
@@ -95,17 +92,14 @@ class Trainer:
             self.losses1.update({'finetune_' + key: finetune_loss[key] * temp_loss})
             tf.summary.scalar(key, temp_loss)
 
-        # self.loss_stage1 = loss_ratio[0] * self.denoise_loss + loss_ratio[1] * self.SR_loss
-        # self.loss_stage2 = loss_ratio[0] * self.SR_loss + loss_ratio[1] * self.Recon_loss
         self.loss_stage1 = self.denoise_loss
         self.loss_stage2 = loss_ratio[0] * self.denoise_loss + loss_ratio[1] * self.SR_loss
         self.loss_stage3 = loss_ratio[0] * self.denoise_loss + loss_ratio[1] * self.SR_loss + loss_ratio[
             2] * self.Recon_loss
         self.loss_finetune = loss_ratio[3]*self.finetune_loss
-        # self.loss = 0.1*self.denoise_loss + 0.3*self.SR_loss + 0.6*self.Recon_loss
         tf.summary.scalar('learning_rate', self.learning_rate)
-        # define test_loss when test
-        # self.loss_test = loss_ratio[0] * self.denoise_loss + loss_ratio[1] * self.SR_loss + loss_ratio[2] * self.Recon_loss+loss_ratio[3]*self.finetune_loss
+
+
         # ----------------create sess-------------
         configProto = tf.ConfigProto(allow_soft_placement=False, log_device_placement=False)
         configProto.gpu_options.allow_growth = True
@@ -131,10 +125,7 @@ class Trainer:
         self.fetches2['opti_fuse_stage4'] = self.finetune_optim
 
     def _train(self, begin_epoch):
-        """Train the VCD-Net
-        Params
-            -begin_epoch: int, if not 0, a checkpoint file will be loaded and the training will continue from there
-        """
+
         ## create folders to save result images and trained model
         save_dir = test_saving_dir
         tl.files.exists_or_mkdir(save_dir)
@@ -192,6 +183,7 @@ class Trainer:
                 self.sess.run(tf.assign(self.learning_rate, lr_init * new_lr_decay))
                 print('\nlearning rate updated : %f\n' % (lr_init * new_lr_decay))
             for iter in range(self.iter_num):
+                # alternating iteration
                 step_time = time.time()
                 if iter % 2 == 0:
                     i = random.randint(self.test_img_num, self.training_pair_num)
@@ -208,9 +200,6 @@ class Trainer:
                                    self.plchdr_lf: self.training_lfexp[i:i+1]
                                    }
                     evaluated = self.sess.run(self.fetches2, feed_train2)
-
-
-                # learning rate update
 
                 # log
                 loss_str = [name + ':' + str(value) for name, value in evaluated.items() if 'loss' in name]

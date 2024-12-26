@@ -474,7 +474,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('-c', '--ckpt', type=int, default=0, help='')
     parser.add_argument('-g', '--gpu', type=int, default=0, help='')
-    parser.add_argument('-cfg', '--config_path', type=str)
+    # parser.add_argument('-cfg', '--config_path', type=str)
     args = parser.parse_args()
     import os
     import sys
@@ -534,7 +534,6 @@ if __name__ == '__main__':
     ## save_training_json
     local_pre_SRVCD_dict = local_configs.local_pre_SRVCD_dict
     preSRVCD_ckpt_save = checkpoint_dir + local_pre_SRVCD_dict['ckpt_save']
-    # preSRVCD_sample_save = test_saving_dir + local_pre_SRVCD_dict['sample_save']
     args = parser.parse_args()
     # else:
     if local_configs.img_setting.save_hdf5:

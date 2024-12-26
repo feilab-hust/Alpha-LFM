@@ -51,10 +51,7 @@ class Trainer:
 
 
     def _train(self, begin_epoch):
-        """Train the VCD-Net
-        Params
-            -begin_epoch: int, if not 0, a checkpoint file will be loaded and the training will continue from there
-        """
+
         ## create folders to save result images and trained model
         save_dir = test_saving_dir
         tl.files.exists_or_mkdir(save_dir)
@@ -65,7 +62,6 @@ class Trainer:
         #initialize vars
         self.sess.run(tf.global_variables_initializer())
         self.sess.run(tf.assign(self.learning_rate, lr_init))
-
 
         ###====================== LOAD DATA ===========================###
 
@@ -80,7 +76,6 @@ class Trainer:
 
             HR_batch, LF_batch, cursor, epoch = self.dataset.iter()  # get data
             feed_train = {self.plchdr_lf: LF_batch, self.plchdr_SynView: HR_batch}
-
 
             epoch += begin_epoch
             step_time = time.time()
@@ -192,11 +187,10 @@ if __name__ == '__main__':
     import sys
     parser = argparse.ArgumentParser()
     parser.add_argument('-g', '--gpu', type=int, default=0, help='')
-    # parser.add_argument('-cfg', '--config_path', type=str)
     args = parser.parse_args()
     os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
     os.environ['CUDA_VISIBLE_DEVICES'] = str(args.gpu)
-    # sys.path.append(os.path.join(os.getcwd(), 'DL'))
+
     import time
     import tensorflow as tf
     import tensorlayer as tl

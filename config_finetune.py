@@ -3,13 +3,10 @@ import os
 from config import config as base_model_settings
 
 root_path= os.getcwd()
-print('--------------root_path:%s---------'%root_path)
-
-
-fine_tune_data_path= ''
+fine_tune_data_path= './data/finetuning'
 new_model_name= 'finetune_MitoO_to_MitoMatrix'
 gpu_idx = 0
-projection_range= [50,70]
+projection_range= 30      # The DoF of WF (uint:slices)
 
 config = base_model_settings
 config.new_model_name=new_model_name
@@ -35,5 +32,5 @@ config.Loss.SR_loss = {'mse_loss': 1.0,
 config.Loss.Recon_loss = {'mse_loss': 1.0,
                           # 'edge_loss': 0.1
                           }
-config.Loss.finetune_loss = {'wf_loss_mix': 5.0,
+config.Loss.finetune_loss = {'Reprojection_loss': 5.0,
                              }

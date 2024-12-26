@@ -17,9 +17,9 @@ print('--------------root_path:%s---------'%root_path)
 
 # ------------------------------net setting Setting----------------------------------
 label = 'Example_training_debug'  # The name of folder that contains the trained weights
-vol_sr_factor=2
-shift_times=5
-config.img_setting.img_size = 360
+vol_sr_factor=2                   # SR factor of 3D-ReconNet
+shift_times=5                     # Upsampling rate of de-aliasing network
+config.img_setting.img_size = 360        # input LF size
 config.label = label
 config.root_path=root_path
 config.img_setting.sr_factor = shift_times
@@ -27,12 +27,12 @@ config.img_setting.ReScale_factor = [vol_sr_factor / shift_times, vol_sr_factor 
 config.img_setting.Nnum = 15          # N number of the light field psf
 config.img_setting.n_slices = 161     # Z-slices of 3D target
 
-config.img_setting.data_root_path = r'J:\YCQ_TEMP\LF\NC_LFM\rab_trainingpair_Data\rab_base_data_720\S01_TrainingData'   # The training data directory
-config.img_setting.save_hdf5 = False      # The format of training data (default: False, means '.tif' files)
-config.img_setting.save_bit = 16       # The bitdepth of training data
+config.img_setting.data_root_path = r'./data/rab_training'   # The training data directory
+config.img_setting.save_hdf5 = False                 # The format of training data (default: False, means '.tif' files)
+config.img_setting.save_bit = 16                   # The bitdepth of training data
 
 # ------------------------------Net Setting----------------------------------
-config.net_setting.gpu_idx=0            # GPU ID for joint-optimization
+config.net_setting.gpu_idx=0                 # GPU ID for joint-optimization
 config.net_setting.denoise_model = 'LF_attention_denoise'
 config.net_setting.SR_model = 'LF_SA_small'
 config.net_setting.Recon_model = 'MultiRes_UNet'
@@ -68,15 +68,15 @@ config.TRAIN.shuffle_all_data = False
 config.TRAIN.shuffle_for_epoch = True
 config.TRAIN.device = 0
 
-# mino
+# hyperparameters of network
 config.TRAIN.batch_size = 1
 config.TRAIN.lr_init = 1e-4
 config.TRAIN.beta1 = 0.9
 config.TRAIN.n_epoch = 101
 config.TRAIN.lr_decay = 0.5
 config.TRAIN.decay_every = 25
-# ---------------Loss Settings-----------------
 
+# ---------------Loss Settings-----------------
 config.Loss.Ratio = [0.1, 0.2, 0.8]
 
 config.Loss.denoise_loss = {'mse_loss': 1.0}
