@@ -58,5 +58,5 @@ config.Loss.SR_loss = {'mse_loss': 1.0,
 config.Loss.Recon_loss = {'mse_loss': 1.0,
                           # 'edge_loss': 0.1
                           }
-config.Loss.finetune_loss = {'wf_loss': 5.0,
+config.Loss.finetune_loss = {'Reprojection_loss': 5.0,
                              }

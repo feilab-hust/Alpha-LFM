@@ -13,55 +13,39 @@ __all__ = ['mse_loss',
            'get_lpips_loss',
            'get_weighted_loss',
            'g_mse_loss',
-           'mip_loss',
-           'wf_loss',
+           'Reprojection_loss',
            ]
 
 AngRes=15
-def mip_loss(image, reference):
-    with tf.variable_scope('mip_loss'):
-        mip_img = tf.reduce_max(image, axis=-1)
-        mip_ref = tf.reduce_max(reference, axis=-1)
-        mip_loss = tl.cost.mean_squared_error(mip_img, mip_ref, is_mean=True)
 
-        return mip_loss
+def Reprojection_loss(image, reference, **kwargs):
 
-
-def wf_loss(image, reference,**kwargs):
     if "projection_range" in kwargs:
-        projection_range= int(kwargs['projection_range'])
+        local_DOF= int(kwargs['projection_range'])
     else:
-        projection_range=0
-    with tf.variable_scope('wf_loss'):
-        wf_size = reference.get_shape().as_list()
-        proj = tf.image.resize_images(image, [wf_size[1], wf_size[2]])  # re-sample
-        proj_img_max = tf.reduce_max(proj[:, :, :, 0:projection_range], axis=3) if projection_range!=0 else tf.reduce_max(proj, axis=3)
-        proj_img_max = proj_img_max / tf.reduce_max(proj_img_max)
-        proj_img_max = tf.expand_dims(proj_img_max, axis=-1)
-        wf_loss_1 = tl.cost.mean_squared_error(proj_img_max, reference, is_mean=True)
-
-        return 5*wf_loss_1
-
-def Reprojection_loss(image, reference,**kwargs):
-
+        local_DOF=30
+    def generate_custom_square_wave(z_max, total_range=161, range_width=30):
+        z = tf.range(total_range, dtype=tf.int32)
+        z_max_int = tf.cast(z_max, tf.int32)
+        condition = tf.logical_and(z >= (z_max_int - range_width), z <= (z_max_int + range_width))
+        condition = tf.cast(condition,tf.float32)
+        return condition
     with tf.variable_scope('Reprojection_loss'):
         wf_size = reference.get_shape().as_list()
+        inten_list = tf.reduce_mean(image, axis=[1,2])
+        Depth = image.get_shape().as_list()[-1]
+        z_max = tf.to_float(tf.arg_max(inten_list,dimension=1))
+        z_inten_list = generate_custom_square_wave(z_max=z_max,total_range=Depth,range_width=local_DOF)
 
-        inten_list = tf.reduce_mean(image,axis=3)
-        z_max = tf.arg_max(inten_list)
-        
-
-        proj = tf.image.resize_images(image, [wf_size[1], wf_size[2]])  # re-sample
-        proj_img_max = tf.reduce_max(proj[:, :, :, 0:projection_range], axis=3) if projection_range!=0 else tf.reduce_max(proj, axis=3)
+        reSample3D = tf.image.resize_images(image, [wf_size[1], wf_size[2]])
+        z_inten_list = z_inten_list[None,None,None,...]# re-sample
+        reSample3D  = reSample3D*z_inten_list
+        proj_img_max = tf.reduce_max(reSample3D,axis=3)
         proj_img_max = proj_img_max / tf.reduce_max(proj_img_max)
         proj_img_max = tf.expand_dims(proj_img_max, axis=-1)
         wf_loss_1 = tl.cost.mean_squared_error(proj_img_max, reference, is_mean=True)
 
-        return 5*wf_loss_1
-
-
-
-
+        return 5 * wf_loss_1
 
 
 def mse_loss(image, reference):
@@ -189,8 +173,5 @@ def g_mse_loss(image, reference):
     ratio = tf.convert_to_tensor(ratio)
     ratio = tf.nn.sigmoid(ratio/tf.reduce_max(ratio))
     return tf.reduce_mean(ratio * (tf.squared_difference(image, reference)))
-
-
-
 
 
