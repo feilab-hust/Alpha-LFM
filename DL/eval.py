@@ -1,3 +1,5 @@
+import cv2
+
 
 def read_valid_images(path):
     """return images in shape [n_images, height=img_size/n_num, width=img_size/n_num, channels=n_num**2]
@@ -97,27 +99,12 @@ def infer(epoch, batch_size=1, use_cpu=False):
             batch_time = time.time() - start_time
             recon_time = recon_time + batch_time
             save_names = [os.path.join(save_dir , '%s-%s' % (config['net_setting'].Recon_model, _path)) for _path in names[idx:idx + batch_size]]
+
             write3d( path=save_names,
                      x=recon_out,
-                     bitdepth=32
+                     bitdepth=8
                     )
             print("\rtime elapsed (sess.run): %4.4fs " % (time.time() - start_time), end='')
-
-            # sr_out = sess.run(SR_net.outputs, {t_image: valid_lf_extras[idx:idx + batch_size]})
-            # denoise_out = sess.run(denoise_net.outputs, {t_image: valid_lf_extras[idx:idx + batch_size]})
-            # save_names_2 = [os.path.join(save_dir, '%s-%s' % (config['net_setting'].SR_model, _path)) for _path in
-            #               names[idx:idx + batch_size]]
-            # save_names_1 = [os.path.join(save_dir, '%s-%s' % (config['net_setting'].denoise_model, _path)) for _path in
-            #               names[idx:idx + batch_size]]
-            #
-            # write3d( path=save_names_2,
-            #          x=sr_out,
-            #          bitdepth=8
-            #         )
-            # write3d( path=save_names_1,
-            #          x=denoise_out,
-            #          bitdepth=8
-            #         )
 
 if __name__ == '__main__':
     import warnings

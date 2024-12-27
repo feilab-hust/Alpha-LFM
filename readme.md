@@ -41,7 +41,7 @@ Deep-learning model requirments:
 - matplotlib==3.4.1
 - mat73==0.59
 ```
-**More details seen in Section 2: Running environment installation of [Alpha-LFM manual](/Alpha-LFM%20Manual.pdf)**
+**We provided detailed installation description in Section 2: Running environment installation of [Alpha-LFM manual](/Alpha-LFM%20Manual.pdf)**
 
 
 # Usage

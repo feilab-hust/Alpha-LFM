@@ -7,8 +7,9 @@ logging.disable(logging.INFO)
 os.environ["CUDNN_LOGINFO_DBG"] = '0'
 import numpy as np
 import tifffile
-import PIL.Image as pilimg
-import tensorlayer as tl
+# import PIL.Image as pilimg
+# import tensorlayer as tl
+from cv2_rolling_ball import subtract_background_rolling_ball
 import  os
 from skimage import io
 import mat73
@@ -311,6 +312,7 @@ def _write3d(x, path, bitdepth=8, clip=True):
     assert (bitdepth in [8, 16, 32])
     max_ =  np.max(x)
     if clip:
+        x = x- np.mean(x)
         x = np.clip(x, 0, max_)
     if bitdepth == 32:
         x = x.astype(np.float32)
