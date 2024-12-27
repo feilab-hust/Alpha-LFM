@@ -1,4 +1,4 @@
-import cv2
+
 
 
 def read_valid_images(path):
