@@ -311,6 +311,7 @@ def _write3d(x, path, bitdepth=8, clip=True):
     assert (bitdepth in [8, 16, 32])
     max_ =  np.max(x)
     if clip:
+        x = x-np.mean(x)
         x = np.clip(x, 0, max_)
     if bitdepth == 32:
         x = x.astype(np.float32)

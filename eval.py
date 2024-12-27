@@ -99,7 +99,7 @@ def infer(batch_size=1, use_cpu=False):
             save_names = [os.path.join(save_dir , '%s-%s' % (config['net_setting'].Recon_model, _path)) for _path in names[idx:idx + batch_size]]
             write3d( path=save_names,
                      x=recon_out,
-                     bitdepth=32
+                     bitdepth=8
                     )
             print("\rtime elapsed (sess.run): %4.4fs " % (time.time() - start_time), end='')
 
