@@ -110,5 +110,5 @@ If you use this code and relevant data, please cite the corresponding paper wher
 *Adaptive-learning physics-aware light-field microscopy enables day-long and millisecond-scale super-resolution imaging of 3D subcellular dynamics*
 
 # Contact
-Correspondence Should you have any questions regarding this code and the corresponding results, please contact Lanxin Zhu (lanxinzhu@hust.edu.cn)
+Should you have any questions regarding this code and the corresponding results, please contact Lanxin Zhu (lanxinzhu@hust.edu.cn)
 
