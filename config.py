@@ -8,8 +8,8 @@ config.TRAIN = edict()
 config.Loss = edict()
 
 # ------------------------------image Setting----------------------------------
-config.img_setting.img_size = 32
-config.img_setting.sr_factor = [1,2,2]
+config.img_setting.img_size = 32             # The size of input images
+config.img_setting.sr_factor = [1,2,2]       # The sr factors of three sub-networks, 1: LLR->LR, 2: LR->MR, 2: MR->HR
 config.img_setting.n_channels = 1
 
 root_path = r''
@@ -19,7 +19,7 @@ config.img_setting.LR = root_path + 'LR'
 config.img_setting.LLR = root_path +'LLR'
 
 # ------------------------------net setting Setting----------------------------------
-config.net_setting.is_bias = False
+config.net_setting.is_bias = False           # whether to use bias in conv2d operations
 # ------------------------------Label generate----------------------------------
 label = r'mymodel'
 config.label = label
@@ -43,7 +43,7 @@ config.TRAIN.batch_size = 1
 config.TRAIN.lr_init =1e-4
 config.TRAIN.beta1 = 0.9
 config.TRAIN.n_epoch = 101
-config.TRAIN.lr_decay = 0.5
+config.TRAIN.lr_decay = 0.5              # half the learning rate every 'decay_every' epochs
 config.TRAIN.decay_every = 50
 
 # ---------------Loss Settings-----------------
