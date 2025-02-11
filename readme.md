@@ -1,4 +1,4 @@
-## RCAN 
+## RCAN-DPO
 **This is a branch of modified RCAN[1] project with DPO strategy proposed in Alpha-LFM.**
 
 ## Dependencies
