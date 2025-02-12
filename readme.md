@@ -48,4 +48,4 @@ We have provided example data (*'./example_data/lyso.tif'*) and trained weights 
     python train.py
     ```
 ### Reference:
-1. Image Super-Resolution Using Very Deep Residual Channel Attention Networks
+1. Zhang, Yulun, et al. "Image super-resolution using very deep residual channel attention networks." Proceedings of the European conference on computer vision (ECCV). 2018.
